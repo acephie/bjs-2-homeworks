@@ -9,7 +9,6 @@ class AlarmClock {
       throw new Error("Отсутствуют обязательные аргументы");
     }
     if (this.alarmCollection.some((item) => item.time === time)) {
-      //эта проверка врядли верна, позже уточнить
       console.warn("Уже присутствует звонок на это же время");
     }
     this.alarmCollection.push({
@@ -20,19 +19,9 @@ class AlarmClock {
   }
 
   removeClock(time) {
-    // let deleteIndexes = [];
     this.alarmCollection = this.alarmCollection.filter(
       (item) => item.time !== time
     );
-    //   if (item.time === time)
-    //     // deleteIndexes.push(index);
-    //     deleteIndexes.unshift(index);
-    //     return true;
-    //   }
-    // });
-    // deleteIndexes.forEach((item) => {
-    //   this.alarmCollection.splice(item, 1);
-    // });
   }
 
   getCurrentFormattedTime() {
