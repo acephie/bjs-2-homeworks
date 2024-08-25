@@ -25,12 +25,11 @@ class AlarmClock {
   }
 
   getCurrentFormattedTime() {
-    let currentTime = new Date().toLocaleTimeString("ru-RU", {
+    return new Date().toLocaleTimeString("ru-RU", {
       timeZone: "Europe/Moscow",
       hour: "2-digit",
       minute: "2-digit",
     });
-    return currentTime;
   }
 
   start() {
