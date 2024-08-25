@@ -8,7 +8,7 @@ class AlarmClock {
     if (!time || !callback) {
       throw new Error("Отсутствуют обязательные аргументы");
     }
-    if (this.alarmCollection.includes(time)) {
+    if (this.alarmCollection.some((item) => item.time === time)) {
       //эта проверка врядли верна, позже уточнить
       console.warn("Уже присутствует звонок на это же время");
     }
@@ -20,31 +20,27 @@ class AlarmClock {
   }
 
   removeClock(time) {
-    let deleteIndexes = [];
-    this.alarmCollection.filter(function (item, index) {
-      if (item.time === time) {
-        // deleteIndexes.push(index);
-        deleteIndexes.unshift(index);
-        return true;
-      }
-    });
-    deleteIndexes.forEach((item) => {
-      this.alarmCollection.splice(item, 1);
-    });
+    // let deleteIndexes = [];
+    this.alarmCollection = this.alarmCollection.filter(
+      (item) => item.time !== time
+    );
+    //   if (item.time === time)
+    //     // deleteIndexes.push(index);
+    //     deleteIndexes.unshift(index);
+    //     return true;
+    //   }
+    // });
+    // deleteIndexes.forEach((item) => {
+    //   this.alarmCollection.splice(item, 1);
+    // });
   }
 
   getCurrentFormattedTime() {
-    let currentDate = new Date();
-    const options = {
+    let currentTime = new Date().toLocaleTimeString("ru-RU", {
       timeZone: "Europe/Moscow",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
-      timeZoneName: "short",
-    };
-    let currentTime = currentDate
-      .toLocaleTimeString("ru-RU", options)
-      .substring(0, 5);
+    });
     return currentTime;
   }
 
